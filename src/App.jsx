@@ -1,29 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ContactForm from './components/ContactForm/ContactForm';
 import ContactList from './components/ContactList/ContactList';
 import SearchBox from './components/SearchBox/SearchBox';
-import { setContacts, selectContacts } from './redux/contactsSlice';
-import contactsData from './components/Data/contacts.json';
+import { fetchContacts } from "./redux/contactsOps";
+import {
+  selectError,
+  selectLoading,
+} from "./redux/contactsSlice";
 
 import './App.css';
 
 function App() {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
-    if (contacts.length === 0 && !isLoaded) {
-      dispatch(setContacts(contactsData));
-      setIsLoaded(true);
-    }
-  }, [contacts, isLoaded, dispatch]);
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   return (
     <div>
       <h1>Phonebook</h1>
       <ContactForm />
       <SearchBox />
+      {loading && <p>Loading contacts...</p>}
+      {error && <p>Error: {error}</p>}
       <ContactList />
     </div>
   );
