@@ -13,7 +13,7 @@ import './App.css';
 
 function App() {
   const dispatch = useDispatch();
-  const loading = useSelector(selectLoading);
+  const isLoading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function App() {
       <h1>Phonebook</h1>
       <ContactForm />
       <SearchBox />
-      {loading && <p>Loading contacts...</p>}
+      {isLoading && <p>Loading contacts...</p>}
       {error && <p>Error: {error}</p>}
       <ContactList />
     </div>
@@ -34,4 +34,3 @@ function App() {
 
 export default App;
 
-//https://671f5833e7a5792f052de937.mockapi.io/contacts
