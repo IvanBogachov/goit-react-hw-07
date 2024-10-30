@@ -1,10 +1,9 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-// Встановіть базову URL-адресу для axios
+
 axios.defaults.baseURL = "https://671f5833e7a5792f052de937.mockapi.io";
 
-// Отримання масиву контактів
 export const fetchContacts = createAsyncThunk(
   "contacts/fetchAll",
   async (_, thunkAPI) => {
@@ -17,7 +16,6 @@ export const fetchContacts = createAsyncThunk(
   }
 );
 
-// Додавання нового контакту
 export const addContact = createAsyncThunk(
   "contacts/addContact",
   async (contact, thunkAPI) => {
@@ -30,7 +28,6 @@ export const addContact = createAsyncThunk(
   }
 );
 
-// Видалення контакту за ID
 export const deleteContact = createAsyncThunk(
   "contacts/deleteContact",
   async (contactId, thunkAPI) => {
